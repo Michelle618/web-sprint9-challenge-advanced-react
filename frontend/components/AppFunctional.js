@@ -1,19 +1,19 @@
-import React from 'react'
-
+import React, {useState} from 'react'
+import axios from 'axios'
 const initialMessage = ''
 const initialEmail = ''
 const initialSteps = 0
 const initialIndex = 4                         
   // the index the "B" is at
-const [index, setIndex] = useState(4)
-const [email, setEmail] = useState('')
-const [steps, setSteps] = useState(0)
-const [x, setX] = useState(x)
-const [y, setY] = useState(y)
+
   export default function AppFunctional(props) {
   // THE FOLLOWING HELPERS ARE JUST RECOMMENDATIONS.
   // You can delete them and build your own logic from scratch.
-
+  const [index, setIndex] = useState(initialIndex)
+  const [email, setEmail] = useState(initialEmail)
+  const [steps, setSteps] = useState(initialSteps)
+  const [message, setMessage] = useState(initialMessage)
+  
   function getXY() {
    
     let y
@@ -24,54 +24,23 @@ const [y, setY] = useState(y)
    }else{
     y = 3
    }
+   console.log('x,y is currently ' + x + "," + y)
     return [x, y]
   }
-}
+
   // It it not necessary to have a state to track the coordinates.  
  // It's enough to know what index the "B" is at, to be able to calculate them.
   
-let newError
-let createErrorMessage
-  function getXYMessage() {
-     newError(message)
-    try { 
-    if (x < 4) {
-      throw createErrorMessage("You can't go up")
-    }
-  }
-      catch(error) {
-        console.error(error.message)
-      }
-     
-      try {
-     if 
-      (x === 1 || x === 3 || x === 7) {
-      throw createErrorMessage("You can't go left")
-      } 
-    }
-      catch(error) {
-        console.error(error.message)
-      }
+// let newError
 
-      try {  
-       if 
-        (x > 6 && x < 10) {
-         throw createErrorMessage("You can't go down")
-        }
-      }
-        catch(error) {
-        console.error(error.message)
-      }
-    }
-      try {
-      if 
-        (x === 3 || x === 6 || x === 9) {
-           throw createErrorMessage("You can't go right")
-          }
-        }
-          catch(error) {
-            console.error(error.message)
-          }
+  function getXYMessage() {
+    //  newError(message)
+    const [x,y] = getXY()
+    return `Cordinates (${x},${y})`
+  }
+     
+     
+    
     
     // It it not necessary to have a state to track the "Coordinates (2, 2)" message for the user.
     // You can use the `getXY` helper above to obtain the coordinates, and then `getXYMessage`
@@ -79,10 +48,15 @@ let createErrorMessage
   
 
   function reset() {
+    setIndex(initialIndex)
+    setEmail(initialEmail)
+    setSteps(initialSteps)
+    setMessage(initialMessage)
+    }
 
     // Use this helper to reset all states to their initial values.
 
-  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 
   function getNextIndex(direction) {
       switch (direction) {
@@ -96,7 +70,7 @@ let createErrorMessage
         return (index < 3) ? index : index -3
   
       case 'down':
-        return (index < 5 ) ? index : index + 3
+        return (index > 5 ) ? index : index + 3
         default : return index
     }
   }
@@ -113,7 +87,14 @@ let createErrorMessage
   function move(evt) {
   
     const direction = evt.target.id
-
+    const nextIndex = getNextIndex(direction)
+    if (nextIndex !== index) {
+      setSteps(steps + 1)
+      setMessage(initialMessage)
+      setIndex(nextIndex)
+    }else {
+      setMessage(`You can't go ${direction}`)
+    }
     // This event handler can use the helper above to obtain a new index for the "B",
     // and change any states accordingly.
   }
@@ -125,21 +106,27 @@ let createErrorMessage
 
   function onSubmit(evt) {
     evt.preventDefault()
-   post.axios = 'http://localhost:9000/api/result'
+   const URL = 'http://localhost:9000/api/result'
+   axios.post( URL, {email, steps, x, y})
+   .then(res => {
+    setEmail(initialEmail)
+   })
+   .catch(error => console.error('Error:', error))
+   
     // Use a POST request to send a payload to the server.
   }
 
     return (
     <div id="wrapper" className={props.className}>
       <div className="info">
-        <h3 id="coordinates">Coordinates (2, 2)</h3>
-        <h3 id="steps">You moved 0 times</h3>
+        <h3 id="coordinates">{getXYMessage()}</h3>
+        <h3 id="steps">{`You moved ${steps} times`}</h3>
       </div>
       <div id="grid">
         {
           [0, 1, 2, 3, 4, 5, 6, 7, 8].map(idx => (
-            <div key={idx} className={`square${idx === 4 ? ' active' : ''}`}>
-              {idx === 4 ? 'B' : null}
+            <div key={idx} className={`square${idx === index ? ' active' : ''}`}>
+              {idx === index ? 'B' : null}
             </div>
           ))
         }
@@ -148,11 +135,11 @@ let createErrorMessage
         <h3 id="message"></h3>
       </div>
       <div id="keypad">
-        <button id="left">LEFT</button>
-        <button id="up">UP</button>
-        <button id="right">RIGHT</button>
-        <button id="down">DOWN</button>
-        <button id="reset">reset</button>
+        <button onClick={move} id="left">LEFT</button>
+        <button  onClick={move} id="up">UP</button>
+        <button  onClick={move} id="right">RIGHT</button>
+        <button  onClick={move} id="down">DOWN</button>
+        <button onClick={reset} id="reset">reset</button>
       </div>
       <form>
         <input onChange={onChange} id="email" type="email" placeholder="type email"></input>
@@ -160,4 +147,4 @@ let createErrorMessage
       </form>
     </div>
   )
-
+  }
