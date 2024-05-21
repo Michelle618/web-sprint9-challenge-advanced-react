@@ -106,12 +106,14 @@ const initialIndex = 4
 
   function onSubmit(evt) {
     evt.preventDefault()
+    const [x,y] = getXY()
    const URL = 'http://localhost:9000/api/result'
    axios.post( URL, {email, steps, x, y})
    .then(res => {
+    setMessage(res.data.message)
     setEmail(initialEmail)
    })
-   .catch(error => console.error('Ouch: email is required.', error))
+   .catch(error => console.error('Error:', error))
    
     // Use a POST request to send a payload to the server.
   }
@@ -143,7 +145,7 @@ const initialIndex = 4
       </div>
       <form>
         <input onChange={onChange} id="email" type="email" placeholder="type email" value={email}></input>
-        <input onSubmit={onSubmit} id="submit" type="submit"></input>
+        <input onClick={onSubmit} id="submit" type="submit"></input>
       </form>
     </div>
   )
