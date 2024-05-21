@@ -111,7 +111,7 @@ const initialIndex = 4
    .then(res => {
     setEmail(initialEmail)
    })
-   .catch(error => console.error('Error:', error))
+   .catch(error => console.error('Ouch: email is required.', error))
    
     // Use a POST request to send a payload to the server.
   }
