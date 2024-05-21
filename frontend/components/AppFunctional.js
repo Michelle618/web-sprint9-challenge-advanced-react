@@ -122,7 +122,7 @@ const initialIndex = 4
     <div id="wrapper" className={props.className}>
       <div className="info">
         <h3 id="coordinates">{getXYMessage()}</h3>
-        <h3 id="steps">{`You moved ${steps} times`}</h3>
+        <h3 id="steps">{steps === 1 ? `You moved ${steps} time` : `You moved ${steps} times`}</h3>
       </div>
       <div id="grid">
         {
