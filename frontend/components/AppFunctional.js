@@ -142,7 +142,7 @@ const initialIndex = 4
         <button onClick={reset} id="reset">reset</button>
       </div>
       <form>
-        <input onChange={onChange} id="email" type="email" placeholder="type email">{reset}</input>
+        <input onChange={onChange} id="email" type="email" placeholder="type email" value={email}></input>
         <input onSubmit={onSubmit} id="submit" type="submit"></input>
       </form>
     </div>
