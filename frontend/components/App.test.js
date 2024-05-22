@@ -40,7 +40,7 @@ test('coordinates rendering', () => {
 })
 // Write your tests here
 test('sanity', () => {
-  expect(true).toBe(false)
+  expect(true).toBe(true)
 })
 
 // test('email placeholder is present', async => () => {

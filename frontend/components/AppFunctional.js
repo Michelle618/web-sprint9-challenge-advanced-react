@@ -107,13 +107,22 @@ const initialIndex = 4
   function onSubmit(evt) {
     evt.preventDefault()
     const [x,y] = getXY()
+    let message
    const URL = 'http://localhost:9000/api/result'
    axios.post( URL, {email, steps, x, y})
    .then(res => {
-    setMessage(res.data.message)
+    // setMessage(res.data.message)
+    message = res.data.message
     setEmail(initialEmail)
    })
-   .catch(error => console.error('Error:', error))
+   .catch(err => {
+    message = err.response.data
+   })
+   .finally(() => {
+    setMessage(message)
+    setEmail(initialEmail)
+   })
+  
    
     // Use a POST request to send a payload to the server.
   }
