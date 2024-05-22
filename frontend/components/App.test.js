@@ -7,14 +7,14 @@ import { resetAppFunctional } from '../../backend/helpers'
 import {AppFunctional} from '/.AppFunctional.js'
 
 // describe('AppFunctional Component', () => {
-  let user, email, steps, message, index, x, y,
+  // let user, email, steps, message, index, x, y,
   afterEach(() => {server.resetHandlers() })
   beforeAll(() => {server.listen() }) 
   afterAll(() => {server.close() })
   beforeEach(async () => {
     resetAppFunctional()
     render(<appFunctional />)
-    user = userEvent.setup()
+    // user = userEvent.setup()
   })
 // })
 
