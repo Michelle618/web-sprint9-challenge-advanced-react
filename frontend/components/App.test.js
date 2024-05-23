@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import server from '../../backend/mock-server'
 import { resetAppFunctional } from '../../backend/helpers'
-import {AppFunctional} from '/.AppFunctional.js'
+import AppFunctional from './AppFunctional.js'
 
 // describe('AppFunctional Component', () => {
   // let user, email, steps, message, index, x, y,
