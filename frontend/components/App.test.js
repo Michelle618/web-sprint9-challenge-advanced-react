@@ -29,7 +29,7 @@ test('can type input and submit it', () => {
 test('submit email and get proper message', () => {
   expect(screen.getByText('')
 
-})
+)
 
 test('proper error message - 422 (forbidden email)', () => {
 
