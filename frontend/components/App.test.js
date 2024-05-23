@@ -14,7 +14,7 @@ import {AppFunctional} from '/.AppFunctional.js'
   beforeEach(async () => {
     resetAppFunctional()
     render(<appFunctional />)
-    // user = userEvent.setup()
+  let user = userEvent.setup()
   })
 // })
 
