@@ -19,23 +19,27 @@ import AppFunctional from './AppFunctional.js'
 // })
 
 test('component renders', () => {
+  expect(screen.getByText('Welcome to the Grid')).toBeVisible
 
 })
 
-test('can type input and submit it', () => {
+test('can type input and submit it', () => {async
+  expect(await screen.findByText('mstaton618 win #32')).toBeVisible
 
 })
 
-test('submit email and get proper message', () => {
-  expect(screen.getByText('')
+test('submit email and get proper message', () => {async
+  expect(await screen.findByText('mstaton618 win #32')).toBeVisible
+}
 
-)
 
-test('proper error message - 422 (forbidden email)', () => {
+test('proper error message - 422 (forbidden email)', () => {async
+  expect(await screen.findByText('foo@bar.baz failure #32')).toBeVisible
+}
 
-})
 
 test('coordinates rendering', () => {
+  expect(screen.getByText(`Coordinates${(x,y)}`)).toBeVisible
 
 })
 // Write your tests here
@@ -48,4 +52,3 @@ test('sanity', () => {
 //   screen.getByPlaceholderText('type email')
 // })
 // })
-
