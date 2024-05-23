@@ -111,12 +111,12 @@ const initialIndex = 4
    const URL = 'http://localhost:9000/api/result'
    axios.post( URL, {email, steps, x, y})
    .then(res => {
-    setMessage(res.data.message)
-    // message = res.data.message
+    // setMessage(res.data.message)
+    message = res.data.message
     setEmail(initialEmail)
    })
    .catch(err => {
-    setMessage = err.response.data
+    message = err.response.data.message
    })
    .finally(() => {
     setMessage(message)
