@@ -113,7 +113,7 @@ const initialIndex = 4
    .then(res => {
     // setMessage(res.data.message)
     message = res.data.message
-    setEmail(initialEmail)
+    // setEmail(initialEmail)
    })
    .catch(err => {
     message = err.response.data.message

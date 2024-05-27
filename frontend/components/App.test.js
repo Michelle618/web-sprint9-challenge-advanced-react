@@ -19,6 +19,7 @@ import AppFunctional from './AppFunctional.js'
 // })
 
 test('component renders', () => {
+  render(<AppFunctional component/>)
   expect(screen.getByText('Welcome to the Grid')).toBeVisible
 
 })
