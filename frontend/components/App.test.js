@@ -22,7 +22,7 @@ test('moves correctly and updates coordinates and steps', () => {
   
   fireEvent.click(screen.getByText('LEFT'));
   expect(screen.getByText("You moved 1 time")).toBeInTheDocument();
-  expect(screen.getByText(/Coordinates \(1, 2\)/)).toBeInTheDocument();
+  expect(screen.getByText("Coordinates (1, 2)")).toBeInTheDocument();
 
   fireEvent.click(screen.getByText('UP'));
   expect(screen.getByText(/You moved 2 times/)).toBeInTheDocument();
